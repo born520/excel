@@ -1144,35 +1144,56 @@ th, td {
     border: 1px solid #ddd;
 }
 
-/* 작은 화면에서 테이블을 블록 형태로 변경 */
-@media screen and (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 
-    /* 헤더를 숨기고 각 셀에 헤더 정보를 추가 */
-    th {
-        display: none;
+    /* 테이블을 감싸는 컨테이너 */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
     }
 
-    td {
-        position: relative;
-        padding-left: 50%;
-        white-space: pre-wrap;
+    table {
+        width: 100%; /* 테이블이 화면 너비에 꽉 차도록 설정 */
+        border-collapse: collapse;
     }
 
-    td:before {
-        content: attr(data-label); /* 셀에 헤더 정보를 삽입 */
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
+    th, td {
+        padding: 10px;
         text-align: left;
-        font-weight: bold;
+        border: 1px solid #ddd;
     }
-}
+
+    @media screen and (max-width: 600px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        th {
+            display: none;
+        }
+
+        td {
+            position: relative;
+            padding-left: 50%;
+            white-space: pre-wrap;
+        }
+
+        td:before {
+            content: attr(data-label);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+    }
 </style>
 </head>
 
