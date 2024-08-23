@@ -6,7 +6,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <meta name=ProgId content=Excel.Sheet>
 <meta name=Generator content="Microsoft Excel 15">
-<link rel=File-List href="responsive.files/filelist.xml">
+<link rel=File-List href="responsive02.files/filelist.xml">
 <style id="aaa_3739_Styles">
 <!--table
 	{mso-displayed-decimal-separator:"\.";
@@ -1133,88 +1133,6 @@ rt
 	mso-font-charset:129;
 	mso-char-type:none;}
 -->
-/* 전체 페이지와 테이블을 화면에 꽉 차도록 설정 */
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%; /* 필요한 경우 */
-}
-
-/* 테이블을 감싸는 컨테이너 */
-.table-container {
-    width: 100%;
-    overflow-x: auto; /* 가로 스크롤 허용 */
-}
-
-/* 테이블 설정 */
-table {
-    width: 100%; /* 테이블이 부모의 전체 너비를 차지하도록 설정 */
-    max-width: 100%; /* 필요한 경우, 최대 너비 설정 */
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-    box-sizing: border-box; /* 패딩과 보더가 포함된 크기 계산 */
-}
-
-/* 반응형 설정 */
-@media screen and (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    th {
-        display: none;
-    }
-
-    td {
-        position: relative;
-        padding-left: 50%;
-        white-space: pre-wrap;
-    }
-
-    td:before {
-        content: attr(data-label);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-    }
-}
-	body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* 페이지의 너비를 100%로 설정 */
-    height: 100%; /* 페이지의 높이를 100%로 설정 */
-}
-
-.container {
-    width: 100%; /* 컨테이너의 너비를 100%로 설정 */
-    height: 100%; /* 컨테이너의 높이를 100%로 설정 */
-    display: flex; /* 컨테이너 내부의 요소들이 유연하게 배치되도록 설정 */
-    justify-content: center; /* 컨테이너 내부의 요소들을 가로로 중앙에 배치 */
-    align-items: center; /* 컨테이너 내부의 요소들을 세로로 중앙에 배치 */
-}
-
-table {
-    width: 100%; /* 테이블의 너비를 100%로 설정 */
-    max-width: 100%; /* 테이블의 최대 너비를 100%로 제한 */
-    height: auto; /* 테이블의 높이는 자동으로 설정 */
-    border-collapse: collapse; /* 테이블 셀 간의 간격을 없애기 */
-}
-
-table th, table td {
-    padding: 10px; /* 테이블 셀 안에 여백을 추가 */
-    text-align: left; /* 텍스트를 왼쪽 정렬 */
-}
 </style>
 </head>
 
@@ -1486,19 +1404,6 @@ table th, table td {
 <!----------------------------->
 <!--Excel의 웹 페이지 마법사로 게시해서 나온 결과의 끝-->
 <!----------------------------->
-	    <!-- data-label 속성 추가를 위한 JavaScript 코드 -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('table').forEach(table => {
-            const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
-            table.querySelectorAll('tbody tr').forEach(tr => {
-                Array.from(tr.children).forEach((td, i) => {
-                    td.setAttribute('data-label', headers[i]);
-                });
-            });
-        });
-    });
-    </script>
 </body>
 
 </html>
