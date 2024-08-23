@@ -1189,6 +1189,32 @@ th, td {
         font-weight: bold;
     }
 }
+	body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* 페이지의 너비를 100%로 설정 */
+    height: 100%; /* 페이지의 높이를 100%로 설정 */
+}
+
+.container {
+    width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+    height: 100%; /* 컨테이너의 높이를 100%로 설정 */
+    display: flex; /* 컨테이너 내부의 요소들이 유연하게 배치되도록 설정 */
+    justify-content: center; /* 컨테이너 내부의 요소들을 가로로 중앙에 배치 */
+    align-items: center; /* 컨테이너 내부의 요소들을 세로로 중앙에 배치 */
+}
+
+table {
+    width: 100%; /* 테이블의 너비를 100%로 설정 */
+    max-width: 100%; /* 테이블의 최대 너비를 100%로 제한 */
+    height: auto; /* 테이블의 높이는 자동으로 설정 */
+    border-collapse: collapse; /* 테이블 셀 간의 간격을 없애기 */
+}
+
+table th, table td {
+    padding: 10px; /* 테이블 셀 안에 여백을 추가 */
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+}
 </style>
 </head>
 
