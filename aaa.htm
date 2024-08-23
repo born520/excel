@@ -310,49 +310,49 @@ function fnSetActiveSheet(iSh)
   <x:ProtectWindows>False</x:ProtectWindows>
  </x:ExcelWorkbook>
 </xml><![endif]-->
-     <style>
-    /* 기본 테이블 스타일 */
-    table {
-        width: 100%;
-        border-collapse: collapse;
+<style>
+/* 기본 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* 작은 화면에서 테이블을 블록 형태로 변경 */
+@media screen and (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
     }
 
-    th, td {
-        padding: 10px;
+    /* 헤더를 숨기고 각 셀에 헤더 정보를 추가 */
+    th {
+        display: none;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        white-space: pre-wrap;
+    }
+
+    td:before {
+        content: attr(data-label); /* 셀에 헤더 정보를 삽입 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
         text-align: left;
-        border: 1px solid #ddd;
+        font-weight: bold;
     }
-
-    /* 작은 화면에서 테이블을 블록 형태로 변경 */
-    @media screen and (max-width: 600px) {
-        table, thead, tbody, th, td, tr {
-            display: block;
-        }
-
-        /* 헤더를 숨기고 각 셀에 헤더 정보를 추가 */
-        th {
-            display: none;
-        }
-
-        td {
-            position: relative;
-            padding-left: 50%;
-            white-space: pre-wrap;
-        }
-
-        td:before {
-            content: attr(data-label); /* 셀에 헤더 정보를 삽입 */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 45%;
-            padding-right: 10px;
-            white-space: nowrap;
-            text-align: left;
-            font-weight: bold;
-        }
-    }
-    </style>
+}
+</style>
 </head>
 
 <frameset rows="*,39" border=0 width=0 frameborder=no framespacing=0>
@@ -362,22 +362,19 @@ function fnSetActiveSheet(iSh)
   <body>
    <p>이 페이지에는 프레임이 있지만 사용 중인 브라우저에서 프레임을 지원하지 않습니다.</p>
    <body>
-    <!-- 기존의 HTML 콘텐츠가 여기에 있습니다 -->
-
-    <!-- 여기서부터 추가하는 JavaScript 코드 -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('table').forEach(table => {
-            const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
-            table.querySelectorAll('tbody tr').forEach(tr => {
-                Array.from(tr.children).forEach((td, i) => {
-                    td.setAttribute('data-label', headers[i]);
-                });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('table').forEach(table => {
+        const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
+        table.querySelectorAll('tbody tr').forEach(tr => {
+            Array.from(tr.children).forEach((td, i) => {
+                td.setAttribute('data-label', headers[i]);
             });
         });
     });
-    </script>
-    <!-- 여기까지 추가하는 JavaScript 코드 -->
+});
+</script>
+
 </body>
 
   </body>
