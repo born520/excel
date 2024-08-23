@@ -1133,6 +1133,46 @@ rt
 	mso-font-charset:129;
 	mso-char-type:none;}
 -->
+	table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* 작은 화면에서 테이블을 블록 형태로 변경 */
+@media screen and (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* 헤더를 숨기고 각 셀에 헤더 정보를 추가 */
+    th {
+        display: none;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        white-space: pre-wrap;
+    }
+
+    td:before {
+        content: attr(data-label); /* 셀에 헤더 정보를 삽입 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+}
 </style>
 </head>
 
@@ -1403,6 +1443,18 @@ rt
 <!----------------------------->
 <!--Excel의 웹 페이지 마법사로 게시해서 나온 결과의 끝-->
 <!----------------------------->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('table').forEach(table => {
+        const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
+        table.querySelectorAll('tbody tr').forEach(tr => {
+            Array.from(tr.children).forEach((td, i) => {
+                td.setAttribute('data-label', headers[i]);
+            });
+        });
+    });
+});
+</script>
 </body>
 
 </html>
