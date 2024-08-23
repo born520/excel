@@ -87,7 +87,7 @@ function fnBuildTabStrip()
  szHTML =
   "<html><head>"+
   "<style>A:link,A:visited,A:active {text-decoration:none;"+"color:"+c_rgszClr[3]+";}"+
-  ".clTab {cursor:hand;background:"+c_rgszClr[1]+";font:9pt ±¼¸²;padding-left:3px;padding-right:3px;text-align:center;}"+
+  ".clTab {cursor:hand;background:"+c_rgszClr[1]+";font:9pt êµ´ë¦¼;padding-left:3px;padding-right:3px;text-align:center;}"+
   ".clBorder {background:"+c_rgszClr[2]+";font:1pt;}"+
   "</style></head><body onload=\"parent.fnInit();\" onselectstart=\"event.returnValue=false;\" ondragstart=\"event.returnValue=false;\" bgcolor="+c_rgszClr[4]+
   " topmargin=0 leftmargin=0><table id=tbTabs cellpadding=0 cellspacing=0>";
@@ -310,6 +310,49 @@ function fnSetActiveSheet(iSh)
   <x:ProtectWindows>False</x:ProtectWindows>
  </x:ExcelWorkbook>
 </xml><![endif]-->
+     <style>
+    /* ê¸°ë³¸ í…Œì´ë¸” ìŠ¤íƒ€ì¼ */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    /* ì‘ì€ í™”ë©´ì—ì„œ í…Œì´ë¸”ì„ ë¸”ë¡ í˜•íƒœë¡œ ë³€ê²½ */
+    @media screen and (max-width: 600px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        /* í—¤ë”ë¥¼ ìˆ¨ê¸°ê³  ê° ì…€ì— í—¤ë” ì •ë³´ë¥¼ ì¶”ê°€ */
+        th {
+            display: none;
+        }
+
+        td {
+            position: relative;
+            padding-left: 50%;
+            white-space: pre-wrap;
+        }
+
+        td:before {
+            content: attr(data-label); /* ì…€ì— í—¤ë” ì •ë³´ë¥¼ ì‚½ì… */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+    }
+    </style>
 </head>
 
 <frameset rows="*,39" border=0 width=0 frameborder=no framespacing=0>
@@ -317,7 +360,26 @@ function fnSetActiveSheet(iSh)
  <frame src="aaa.files/tabstrip.htm" name="frTabs" marginwidth=0 marginheight=0>
  <noframes>
   <body>
-   <p>ÀÌ ÆäÀÌÁö¿¡´Â ÇÁ·¹ÀÓÀÌ ÀÖÁö¸¸ »ç¿ë ÁßÀÎ ºê¶ó¿ìÀú¿¡¼­ ÇÁ·¹ÀÓÀ» Áö¿øÇÏÁö ¾Ê½À´Ï´Ù.</p>
+   <p>ì´ í˜ì´ì§€ì—ëŠ” í”„ë ˆì„ì´ ìˆì§€ë§Œ ì‚¬ìš© ì¤‘ì¸ ë¸Œë¼ìš°ì €ì—ì„œ í”„ë ˆì„ì„ ì§€ì›í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.</p>
+   <body>
+    <!-- ê¸°ì¡´ì˜ HTML ì½˜í…ì¸ ê°€ ì—¬ê¸°ì— ìˆìŠµë‹ˆë‹¤ -->
+
+    <!-- ì—¬ê¸°ì„œë¶€í„° ì¶”ê°€í•˜ëŠ” JavaScript ì½”ë“œ -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('table').forEach(table => {
+            const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                Array.from(tr.children).forEach((td, i) => {
+                    td.setAttribute('data-label', headers[i]);
+                });
+            });
+        });
+    });
+    </script>
+    <!-- ì—¬ê¸°ê¹Œì§€ ì¶”ê°€í•˜ëŠ” JavaScript ì½”ë“œ -->
+</body>
+
   </body>
  </noframes>
 </frameset>
