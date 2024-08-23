@@ -1133,6 +1133,59 @@ rt
 	mso-font-charset:129;
 	mso-char-type:none;}
 -->
+	        /* 기본 스타일: 모든 요소가 화면에 꽉 차도록 설정 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* 테이블을 감싸는 컨테이너 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto; /* 테이블이 화면에 맞지 않으면 가로 스크롤 생성 */
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%; /* 테이블이 부모 컨테이너의 너비에 맞게 확장 */
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* 반응형 스타일: 작은 화면에서는 블록 형태로 변경 */
+        @media screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                display: none; /* 작은 화면에서 헤더 숨기기 */
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+                white-space: pre-wrap;
+            }
+
+            td:before {
+                content: attr(data-label); /* 셀에 헤더 정보 추가 */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
 </style>
 </head>
 
@@ -1404,6 +1457,19 @@ rt
 <!----------------------------->
 <!--Excel의 웹 페이지 마법사로 게시해서 나온 결과의 끝-->
 <!----------------------------->
+	    <!-- data-label 속성 추가를 위한 JavaScript 코드 -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('table').forEach(table => {
+            const headers = Array.from(table.querySelectorAll('th')).map(th => th.innerText);
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                Array.from(tr.children).forEach((td, i) => {
+                    td.setAttribute('data-label', headers[i]);
+                });
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>
